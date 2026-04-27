@@ -90,6 +90,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Pull requests are welcome. Feel free to open an issue if you find a bug.
 
+## Troubleshooting
+
+- **Server won't start**: Ensure no other process is using port 3001.
+- **Client won't start**: Ensure no other process is using port 5173.
+- **SQLite error**: Make sure you have write permissions in the `server` directory.
+- **LeetCode Sync fails**: Check your internet connection and verify that the username is correct and public.
+
 <p align="center">
   Built for the LeetCode community.
 </p>
