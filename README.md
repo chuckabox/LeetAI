@@ -96,6 +96,7 @@ Pull requests are welcome. Feel free to open an issue if you find a bug.
 - **Client won't start**: Ensure no other process is using port 5173.
 - **SQLite error**: Make sure you have write permissions in the `server` directory.
 - **LeetCode Sync fails**: Check your internet connection and verify that the username is correct and public.
+- **Reset Data**: If you need to reset all stored data, simply delete the `server/data.db` file and restart the server.
 
 <p align="center">
   Built for the LeetCode community.
