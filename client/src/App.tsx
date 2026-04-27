@@ -83,6 +83,7 @@ function App() {
         <div className="flex items-center gap-4">
           <button 
             onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             className="flex items-center gap-2 hover:text-accent transition-colors cursor-pointer"
           >
             {theme === 'dark' ? <Sun size={12} /> : <Moon size={12} />}
