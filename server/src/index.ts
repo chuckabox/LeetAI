@@ -58,9 +58,12 @@ app.post('/api/user/sync', async (req, res) => {
       tagStats,
       recommendations
     });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+  } catch (error: any) {
+    console.error('Sync Error:', error.message);
+    res.status(500).json({ 
+      error: 'Failed to sync with LeetCode', 
+      details: error.message 
+    });
   }
 });
 
