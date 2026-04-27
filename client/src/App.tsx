@@ -245,6 +245,8 @@ function App() {
                       <Diagnostic label="TREES_HIERARCHY" value={45} />
                       <Diagnostic label="GRAPH_TRAVERSAL" value={15} />
                       <Diagnostic label="BACKTRACKING" value={30} />
+                      <Diagnostic label="SLIDING_WINDOW" value={55} />
+                      <Diagnostic label="BIT_MANIPULATION" value={10} />
                     </div>
                     
                     <div className="pt-6 border-t border-(--border-color)">
