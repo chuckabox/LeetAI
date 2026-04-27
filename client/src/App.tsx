@@ -52,6 +52,8 @@ function App() {
     e.preventDefault();
     setLoading(true);
     try {
+      // Small artificial delay for UX
+      await new Promise(resolve => setTimeout(resolve, 800));
       const response = await axios.post('http://localhost:3001/api/user/sync', { username });
       setUserData(response.data);
     } catch (error: any) {
