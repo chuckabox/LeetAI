@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { fetchUserProfile, fetchUserTagStats } from './services/leetcode';
+import { fetchUserProfile, fetchUserTagStats, syncAllProblems } from './services/leetcode';
 import { generateRecommendations } from './services/recommendation';
 import db from './db/database';
 
@@ -35,7 +35,7 @@ app.post('/api/user/sync', async (req, res) => {
       VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
     `).run(username, total, easy, medium, hard);
 
-    const recommendations = generateRecommendations(tagStats);
+    const recommendations = generateRecommendations(db, tagStats);
 
     res.json({
       profile: {
@@ -66,6 +66,8 @@ app.patch('/api/recommendations/:id', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
+  // Sync problems on startup
+  await syncAllProblems(db);
 });

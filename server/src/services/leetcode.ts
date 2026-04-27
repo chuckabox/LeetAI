@@ -69,40 +69,75 @@ export const fetchUserTagStats = async (username: string) => {
 
 // Mock function for problem suggestions based on tags
 // In a real app, you'd have a database of LeetCode problems
-export const getProblemsByTag = (tag: string) => {
-  const mockProblems: Record<string, any[]> = {
-    'array': [
-      { id: '1', title: 'Two Sum', difficulty: 'Easy', tag: 'array' },
-      { id: '15', title: '3Sum', difficulty: 'Medium', tag: 'array' },
-      { id: '41', title: 'First Missing Positive', difficulty: 'Hard', tag: 'array' },
-      { id: '26', title: 'Remove Duplicates from Sorted Array', difficulty: 'Easy', tag: 'array' },
-      { id: '11', title: 'Container With Most Water', difficulty: 'Medium', tag: 'array' },
-    ],
-    'dynamic-programming': [
-      { id: '70', title: 'Climbing Stairs', difficulty: 'Easy', tag: 'dynamic-programming' },
-      { id: '322', title: 'Coin Change', difficulty: 'Medium', tag: 'dynamic-programming' },
-      { id: '72', title: 'Edit Distance', difficulty: 'Hard', tag: 'dynamic-programming' },
-      { id: '198', title: 'House Robber', difficulty: 'Medium', tag: 'dynamic-programming' },
-      { id: '5', title: 'Longest Palindromic Substring', difficulty: 'Medium', tag: 'dynamic-programming' },
-    ],
-    'string': [
-        { id: '20', title: 'Valid Parentheses', difficulty: 'Easy', tag: 'string' },
-        { id: '3', title: 'Longest Substring Without Repeating Characters', difficulty: 'Medium', tag: 'string' },
-        { id: '76', title: 'Minimum Window Substring', difficulty: 'Hard', tag: 'string' },
-        { id: '242', title: 'Valid Anagram', difficulty: 'Easy', tag: 'string' },
-    ],
-    'tree': [
-        { id: '104', title: 'Maximum Depth of Binary Tree', difficulty: 'Easy', tag: 'tree' },
-        { id: '236', title: 'Lowest Common Ancestor of a Binary Tree', difficulty: 'Medium', tag: 'tree' },
-        { id: '124', title: 'Binary Tree Maximum Path Sum', difficulty: 'Hard', tag: 'tree' },
-        { id: '102', title: 'Binary Tree Level Order Traversal', difficulty: 'Medium', tag: 'tree' },
-    ],
-    'graph': [
-        { id: '200', title: 'Number of Islands', difficulty: 'Medium', tag: 'graph' },
-        { id: '133', title: 'Clone Graph', difficulty: 'Medium', tag: 'graph' },
-        { id: '207', title: 'Course Schedule', difficulty: 'Medium', tag: 'graph' },
-        { id: '785', title: 'Is Graph Bipartite?', difficulty: 'Medium', tag: 'graph' },
-    ]
-  };
-  return mockProblems[tag] || mockProblems['array'];
+export const syncAllProblems = async (db: any) => {
+  const query = `
+    query problemsetQuestionList($limit: Int) {
+      problemsetQuestionList: questionList(
+        categorySlug: ""
+        limit: $limit
+        skip: 0
+        filters: {}
+      ) {
+        data {
+          questionId
+          questionFrontendId
+          title
+          titleSlug
+          difficulty
+          topicTags {
+            slug
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    console.log('Fetching all problems from LeetCode...');
+    const response = await axios.post(LEETCODE_GRAPHQL_URL, {
+      query,
+      variables: { limit: 1000 }, // Fetch top 1000 problems for now
+    });
+
+    const questions = response.data.data.problemsetQuestionList.data;
+    const insert = db.prepare(`
+      INSERT OR REPLACE INTO problems (id, frontend_id, title, title_slug, difficulty, tags)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `);
+
+    const transaction = db.transaction((qs: any[]) => {
+      for (const q of qs) {
+        insert.run(
+          q.questionId,
+          q.questionFrontendId,
+          q.title,
+          q.titleSlug,
+          q.difficulty,
+          JSON.stringify(q.topicTags.map((t: any) => t.slug))
+        );
+      }
+    });
+
+    transaction(questions);
+    console.log(`Synced ${questions.length} problems to database.`);
+  } catch (error) {
+    console.error('Error syncing problems:', error);
+  }
 };
+
+export const getProblemsByTag = (db: any, tag: string) => {
+  const problems = db.prepare(`
+    SELECT * FROM problems 
+    WHERE tags LIKE ?
+    ORDER BY RANDOM()
+    LIMIT 5
+  `).all(`%${tag}%`);
+
+  return problems.map((p: any) => ({
+    id: p.id,
+    title: p.title,
+    difficulty: p.difficulty,
+    tag: tag
+  }));
+};
+

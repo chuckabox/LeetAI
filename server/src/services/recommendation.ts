@@ -6,7 +6,7 @@ export interface TagStat {
   problemsSolved: number;
 }
 
-export const generateRecommendations = (tagStats: any) => {
+export const generateRecommendations = (db: any, tagStats: any) => {
   const allTags: TagStat[] = [
     ...tagStats.advanced,
     ...tagStats.intermediate,
@@ -22,7 +22,7 @@ export const generateRecommendations = (tagStats: any) => {
   const topWeakTags = weakTags.slice(0, 4); // Pick top 4 weak topics
 
   for (const tag of topWeakTags) {
-    const problems = getProblemsByTag(tag.tagSlug);
+    const problems = getProblemsByTag(db, tag.tagSlug);
     recommendations.push(...problems);
   }
 
