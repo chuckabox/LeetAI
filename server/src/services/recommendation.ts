@@ -18,14 +18,21 @@ export const generateRecommendations = (tagStats: any) => {
     .filter(tag => tag.problemsSolved < 20) // Consider "weak" if solved < 20
     .sort((a, b) => a.problemsSolved - b.problemsSolved);
 
-  const recommendations = [];
-  const topWeakTags = weakTags.slice(0, 3); // Pick top 3 weak topics
+  const recommendations: any[] = [];
+  const topWeakTags = weakTags.slice(0, 4); // Pick top 4 weak topics
 
   for (const tag of topWeakTags) {
     const problems = getProblemsByTag(tag.tagSlug);
-    // Add a mix of difficulties if available
     recommendations.push(...problems);
   }
 
-  return recommendations.slice(0, 8); // Return top 8 recommendations
+  // Deduplicate by ID and limit
+  const seenIds = new Set();
+  const uniqueRecommendations = recommendations.filter(p => {
+    if (seenIds.has(p.id)) return false;
+    seenIds.add(p.id);
+    return true;
+  });
+
+  return uniqueRecommendations.slice(0, 8);
 };

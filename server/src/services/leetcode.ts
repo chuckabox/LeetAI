@@ -70,27 +70,39 @@ export const fetchUserTagStats = async (username: string) => {
 // Mock function for problem suggestions based on tags
 // In a real app, you'd have a database of LeetCode problems
 export const getProblemsByTag = (tag: string) => {
-  const mockProblems = {
+  const mockProblems: Record<string, any[]> = {
     'array': [
       { id: '1', title: 'Two Sum', difficulty: 'Easy', tag: 'array' },
       { id: '15', title: '3Sum', difficulty: 'Medium', tag: 'array' },
       { id: '41', title: 'First Missing Positive', difficulty: 'Hard', tag: 'array' },
+      { id: '26', title: 'Remove Duplicates from Sorted Array', difficulty: 'Easy', tag: 'array' },
+      { id: '11', title: 'Container With Most Water', difficulty: 'Medium', tag: 'array' },
     ],
     'dynamic-programming': [
       { id: '70', title: 'Climbing Stairs', difficulty: 'Easy', tag: 'dynamic-programming' },
       { id: '322', title: 'Coin Change', difficulty: 'Medium', tag: 'dynamic-programming' },
       { id: '72', title: 'Edit Distance', difficulty: 'Hard', tag: 'dynamic-programming' },
+      { id: '198', title: 'House Robber', difficulty: 'Medium', tag: 'dynamic-programming' },
+      { id: '5', title: 'Longest Palindromic Substring', difficulty: 'Medium', tag: 'dynamic-programming' },
     ],
     'string': [
         { id: '20', title: 'Valid Parentheses', difficulty: 'Easy', tag: 'string' },
         { id: '3', title: 'Longest Substring Without Repeating Characters', difficulty: 'Medium', tag: 'string' },
         { id: '76', title: 'Minimum Window Substring', difficulty: 'Hard', tag: 'string' },
+        { id: '242', title: 'Valid Anagram', difficulty: 'Easy', tag: 'string' },
     ],
     'tree': [
         { id: '104', title: 'Maximum Depth of Binary Tree', difficulty: 'Easy', tag: 'tree' },
         { id: '236', title: 'Lowest Common Ancestor of a Binary Tree', difficulty: 'Medium', tag: 'tree' },
         { id: '124', title: 'Binary Tree Maximum Path Sum', difficulty: 'Hard', tag: 'tree' },
+        { id: '102', title: 'Binary Tree Level Order Traversal', difficulty: 'Medium', tag: 'tree' },
+    ],
+    'graph': [
+        { id: '200', title: 'Number of Islands', difficulty: 'Medium', tag: 'graph' },
+        { id: '133', title: 'Clone Graph', difficulty: 'Medium', tag: 'graph' },
+        { id: '207', title: 'Course Schedule', difficulty: 'Medium', tag: 'graph' },
+        { id: '785', title: 'Is Graph Bipartite?', difficulty: 'Medium', tag: 'graph' },
     ]
   };
-  return mockProblems[tag as keyof typeof mockProblems] || mockProblems['array'];
+  return mockProblems[tag] || mockProblems['array'];
 };

@@ -6,10 +6,13 @@
   --font-sans: 'Outfit', sans-serif;
 
   --color-accent: #FFA116;
+  
+  /* Defaults for Dark Mode */
   --color-bg-primary: #0A0A0A;
   --color-bg-secondary: #141414;
   --color-border: #222222;
   --color-text-muted: #888888;
+  --color-text-main: #FFFFFF;
 
   --animate-boot: bootSequence 0.8s cubic-bezier(0.2, 0, 0, 1) forwards;
 
@@ -20,10 +23,31 @@
 }
 
 :root {
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #141414;
+  --border-color: #222222;
+  --text-main: #FFFFFF;
+  --text-muted: #888888;
+  --grid-opacity: 0.02;
+  --scanline-opacity: 0.1;
+}
+
+[data-theme='light'] {
+  --bg-primary: #F8F9FA;
+  --bg-secondary: #FFFFFF;
+  --border-color: #E2E8F0;
+  --text-main: #1A202C;
+  --text-muted: #718096;
+  --grid-opacity: 0.05;
+  --scanline-opacity: 0.02;
+}
+
+:root {
   font-family: var(--font-sans);
-  background-color: var(--color-bg-primary);
-  color: white;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -31,27 +55,24 @@ body {
   overflow-x: hidden;
 }
 
-/* Terminal vibes */
 .terminal-window {
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-secondary);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
   position: relative;
 }
 
 .terminal-header {
   height: 32px;
-  background: #1A1A1A;
-  border-bottom: 1px solid var(--color-border);
+  background: var(--data-theme-header, #1A1A1A);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   padding: 0 12px;
   gap: 6px;
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+[data-theme='light'] .terminal-header {
+  background: #EDF2F7;
 }
 
 .mono {
@@ -59,13 +80,17 @@ body {
 }
 
 .syntax-orange { color: var(--color-accent); }
-.syntax-gray { color: var(--color-text-muted); }
+.syntax-gray { color: var(--text-muted); }
 
-/* Grid Background */
 .bg-grid {
-  background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(255,255,255,var(--grid-opacity)) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255,255,255,var(--grid-opacity)) 1px, transparent 1px);
   background-size: 40px 40px;
+}
+
+[data-theme='light'] .bg-grid {
+    background-image: linear-gradient(to right, rgba(0,0,0,var(--grid-opacity)) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(0,0,0,var(--grid-opacity)) 1px, transparent 1px);
 }
 
 .scanline {
@@ -78,13 +103,5 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 0.1;
-}
-
-button:hover {
-  filter: brightness(1.1);
-}
-
-.border-dash {
-  border: 1px dashed var(--color-border);
+  opacity: var(--scanline-opacity);
 }
