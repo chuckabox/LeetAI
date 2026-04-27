@@ -245,6 +245,7 @@ function App() {
                   <div className="flex items-center gap-3 border-b border-(--border-color) pb-4">
                     <Activity size={18} className="text-accent" />
                     <h2 className="text-xl font-bold mono uppercase tracking-widest">DIAGNOSTICS</h2>
+                    <span className="mono text-[10px] text-(--text-muted) ml-auto">LAST_UPDATED::{new Date().toLocaleDateString()}</span>
                   </div>
                   
                   <div className="terminal-window p-6 space-y-6">
