@@ -5,6 +5,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Express](https://img.shields.io/badge/Express-4.18-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![Client](https://img.shields.io/badge/Client-v1.0.4-blue)](client/)
+[![Server](https://img.shields.io/badge/Server-v1.0.4-green)](server/)
 
 **LeetAI** helps you practice LeetCode problems more effectively. It looks at your public profile, finds topics where you need more practice, and suggests a list of problems to work on.
 
