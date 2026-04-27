@@ -26,6 +26,7 @@ app.get('/health', (req, res) => {
 app.post('/api/user/sync', async (req, res) => {
   const { username } = req.body;
   if (!username) return res.status(400).json({ error: 'Username is required' });
+  if (username.length > 50) return res.status(400).json({ error: 'Username too long' });
 
   try {
     const profile = await fetchUserProfile(username);
