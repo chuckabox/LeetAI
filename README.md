@@ -1,4 +1,4 @@
-# LeetAI 🚀
+# LeetAI
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
@@ -6,38 +6,37 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Express](https://img.shields.io/badge/Express-4.18-000000?logo=express&logoColor=white)](https://expressjs.com/)
 
-**LeetAI** is a high-performance, developer-centric practice recommendation engine for LeetCode. It analyzes your public profile to identify skill gaps and provides a curated queue of problems to help you master common interview patterns.
+**LeetAI** helps you practice LeetCode problems more effectively. It looks at your public profile, finds topics where you need more practice, and suggests a list of problems to work on.
 
-[Explore the Dashboard](#features) • [Installation](#installation) • [Architecture](#architecture)
+[Dashboard](#features) • [Installation](#installation) • [Architecture](#architecture)
 
 ---
 
-## ✨ Features
+## Features
 
-- **Terminal-Industrial UI**: A minimalist, high-density dashboard inspired by modern IDEs and low-level system terminals.
-- **Smart Skill Gap Detection**: Analyzes your solved counts across various categories (Dynamic Programming, Graphs, Trees, etc.) to pinpoint areas for improvement.
-- **Curated Practice Queue**: Generates a personalized set of 8 unique problems tailored to your weakest topics.
-- **Bi-Directional Themes**: Support for both `Terminal Dark` and `Matrix Light` modes with a single toggle.
-- **Real-Time GraphQL Sync**: Connects directly to the LeetCode GraphQL API for instant profile analysis.
-- **Progress Tracking**: Local persistence for marking recommendations as completed and tracking your daily cycles.
+- **Terminal-style UI**: A clean dashboard inspired by code editors and terminals.
+- **Skill Gap Detection**: Finds topics you haven't solved many problems in (like Dynamic Programming or Graphs).
+- **Practice Queue**: Suggests 8 unique problems based on your weakest topics.
+- **Themes**: Switch between dark and light modes.
+- **API Sync**: Gets your latest stats directly from LeetCode.
+- **Progress Tracking**: Saves your completed recommendations locally.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
-- **Framework**: React 19 (Vite)
-- **Styling**: Tailwind CSS v4 (with PostCSS)
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
+- React 19 (Vite)
+- Tailwind CSS v4
+- Framer Motion
+- Lucide React
 
 ### Backend
-- **Runtime**: Node.js
-- **Server**: Express with TypeScript
-- **Database**: SQLite (better-sqlite3) for persistent user data
-- **API**: LeetCode GraphQL API integration
+- Node.js & Express with TypeScript
+- SQLite for storage
+- LeetCode GraphQL API
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 - Node.js (v18+)
@@ -50,11 +49,11 @@
    cd leetai
    ```
 
-2. Run the startup script (Windows):
+2. Start the project (Windows):
    ```powershell
    .\start.ps1
    ```
-   *This will automatically install dependencies and launch both the client (port 5173) and server (port 3001).*
+   *This installs dependencies and starts the client (port 5173) and server (port 3001).*
 
 ### Manual Setup
 **Backend:**
@@ -73,9 +72,9 @@ npm run dev
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-LeetAI follows a modern monorepo-lite architecture:
+LeetAI uses a simple client-server setup:
 
 ```mermaid
 graph TD
@@ -88,26 +87,26 @@ graph TD
     B -->|Response| A
 ```
 
-## 📸 Screenshots
+## Screenshots
 
 ### Dashboard (Dark Mode)
-> *Placeholder: Add your screenshot here*
+> *Add your screenshot here*
 
 ### Dashboard (Light Mode)
-> *Placeholder: Add your screenshot here*
+> *Add your screenshot here*
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Pull requests are welcome. Feel free to open an issue if you find a bug.
 
 ---
 
 <p align="center">
-  Built with 🧡 for the LeetCode community.
+  Built for the LeetCode community.
 </p>

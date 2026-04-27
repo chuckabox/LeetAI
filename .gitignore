@@ -41,3 +41,7 @@ data.db
 
 # Vite
 .vite/
+
+# Agents
+.agents/
+.agent/
