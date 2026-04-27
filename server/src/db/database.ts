@@ -14,6 +14,15 @@ db.exec(`
     last_synced TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
 
+  CREATE TABLE IF NOT EXISTS problems (
+    id TEXT PRIMARY KEY,
+    frontend_id TEXT,
+    title TEXT,
+    title_slug TEXT,
+    difficulty TEXT,
+    tags TEXT
+  );
+
   CREATE TABLE IF NOT EXISTS user_tags (
     username TEXT,
     tag TEXT,
