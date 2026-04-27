@@ -39,17 +39,18 @@
 - npm or yarn
 
 ### Quick Start
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/chuckabox/LeetAI.git
    cd leetai
    ```
 
-2. Start the project (Windows):
+2. **Launch the application:**
+   If you are on Windows, you can use the provided startup script:
    ```powershell
    .\start.ps1
    ```
-   *This installs dependencies and starts the client (port 5173) and server (port 3001).*
+   *This will automatically install dependencies and start both the client (port 5173) and server (port 3001).*
 
 ### Manual Setup
 **Backend:**
