@@ -69,7 +69,7 @@ npm run dev
 
 ## Architecture
 
-LeetAI uses a simple client-server setup:
+LeetAI uses a simple client-server setup. You can verify the server status via the `/health` endpoint.
 
 ```mermaid
 graph TD
