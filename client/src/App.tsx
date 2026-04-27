@@ -345,7 +345,7 @@ function ProblemRow({ problem, onToggleDone }: { problem: Problem, onToggleDone?
       </div>
       <div className="flex items-center gap-4">
         <a 
-          href={`https://leetcode.com/problems/${problem.title.toLowerCase().replace(/ /g, '-')}/`} 
+          href={`${LEETCODE_BASE_URL}/${problem.title.toLowerCase().replace(/ /g, '-')}/`} 
           target="_blank" 
           rel="noopener noreferrer"
           className="mono text-[10px] text-(--text-muted) hover:text-accent transition-colors flex items-center gap-1"
