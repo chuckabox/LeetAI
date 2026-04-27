@@ -10,8 +10,6 @@
 
 [Dashboard](#features) • [Installation](#installation) • [Architecture](#architecture)
 
----
-
 ## Features
 
 - **Terminal-style UI**: A clean dashboard inspired by code editors and terminals.
@@ -33,8 +31,6 @@
 - Node.js & Express with TypeScript
 - SQLite for storage
 - LeetCode GraphQL API
-
----
 
 ## Installation
 
@@ -70,8 +66,6 @@ npm install
 npm run dev
 ```
 
----
-
 ## Architecture
 
 LeetAI uses a simple client-server setup:
@@ -87,16 +81,6 @@ graph TD
     B -->|Response| A
 ```
 
-## Screenshots
-
-### Dashboard (Dark Mode)
-> *Add your screenshot here*
-
-### Dashboard (Light Mode)
-> *Add your screenshot here*
-
----
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -104,8 +88,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contributing
 
 Pull requests are welcome. Feel free to open an issue if you find a bug.
-
----
 
 <p align="center">
   Built for the LeetCode community.
