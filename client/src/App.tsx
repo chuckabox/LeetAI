@@ -16,6 +16,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const LEETCODE_BASE_URL = 'https://leetcode.com/problems';
+
 // Types
 interface UserProfile {
   username: string;
