@@ -11,9 +11,6 @@ import {
   Hash,
   ArrowRight,
   Database,
-  Search,
-  CheckCircle2,
-  BookOpen,
   Sun,
   Moon
 } from 'lucide-react';
@@ -68,15 +65,15 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-main)] selection:bg-accent/30 bg-grid relative overflow-hidden transition-colors">
+    <div className="min-h-screen bg-(--bg-primary) text-(--text-main) selection:bg-accent/30 bg-grid relative overflow-hidden transition-colors">
       <div className="scanline"></div>
       
       {/* System Status Bar */}
-      <nav className="h-10 border-b border-[var(--border-color)] bg-[var(--bg-primary)] px-4 flex items-center justify-between mono text-[10px] tracking-widest uppercase text-[var(--text-muted)]">
+      <nav className="h-10 border-b border-(--border-color) bg-(--bg-primary) px-4 flex items-center justify-between mono text-[10px] tracking-widest uppercase text-(--text-muted)">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse"></span>
-            <span className="text-[var(--text-main)]">SYSTEM ACTIVE</span>
+            <span className="text-(--text-main)">SYSTEM ACTIVE</span>
           </div>
           <span className="hidden md:inline">NODE: v20.11.0</span>
           <span className="hidden md:inline">LATENCY: 12MS</span>
@@ -123,7 +120,7 @@ function App() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="text-[var(--text-muted)] mono text-sm uppercase tracking-[0.2em]"
+                  className="text-(--text-muted) mono text-sm uppercase tracking-[0.2em]"
                 >
                   Advanced Practice Recommendation Engine
                 </motion.p>
@@ -134,12 +131,12 @@ function App() {
                   <div className="dot bg-[#ff5f56]"></div>
                   <div className="dot bg-[#ffbd2e]"></div>
                   <div className="dot bg-[#27c93f]"></div>
-                  <span className="mono text-[10px] text-[var(--text-muted)] ml-2">ssh root@leetai.system</span>
+                  <span className="mono text-[10px] text-(--text-muted) ml-2">ssh root@leetai.system</span>
                 </div>
                 <div className="p-8">
                   <form onSubmit={handleSync} className="space-y-6">
                     <div className="space-y-2">
-                      <label className="mono text-[10px] text-[var(--text-muted)] uppercase">Authentication</label>
+                      <label className="mono text-[10px] text-(--text-muted) uppercase">Authentication</label>
                       <div className="relative group">
                         <span className="absolute left-4 top-1/2 -translate-y-1/2 mono text-accent">$</span>
                         <input
@@ -147,14 +144,14 @@ function App() {
                           placeholder="ENTER_USERNAME"
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
-                          className="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] py-4 px-10 focus:outline-none focus:border-accent/50 transition-all mono text-sm tracking-widest placeholder:text-[var(--text-muted)] text-[var(--text-main)]"
+                          className="w-full bg-(--bg-primary) border border-(--border-color) py-4 px-10 focus:outline-none focus:border-accent/50 transition-all mono text-sm tracking-widest placeholder:text-(--text-muted) text-(--text-main)"
                         />
                       </div>
                     </div>
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full bg-[var(--text-main)] text-[var(--bg-primary)] font-bold py-4 mono text-sm uppercase tracking-widest hover:bg-accent hover:text-white transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                      className="w-full bg-(--text-main) text-(--bg-primary) font-bold py-4 mono text-sm uppercase tracking-widest hover:bg-accent hover:text-white transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                     >
                       {loading ? (
                         <>
@@ -171,7 +168,7 @@ function App() {
                 </div>
               </div>
               
-              <div className="mt-12 flex flex-wrap justify-center gap-8 md:gap-12 opacity-30 mono text-[10px] uppercase tracking-widest text-[var(--text-main)]">
+              <div className="mt-12 flex flex-wrap justify-center gap-8 md:gap-12 opacity-30 mono text-[10px] uppercase tracking-widest text-(--text-main)">
                 <div className="flex items-center gap-2"><Database size={12} /> GraphQL Sync</div>
                 <div className="flex items-center gap-2"><Code2 size={12} /> pattern analysis</div>
                 <div className="flex items-center gap-2"><Activity size={12} /> gap diagnostics</div>
@@ -185,17 +182,17 @@ function App() {
               className="space-y-12"
             >
               {/* Header Stats - Fixed Grid Lines */}
-              <div className="grid grid-cols-2 md:grid-cols-4 border border-[var(--border-color)] divide-x divide-y divide-[var(--border-color)]">
+              <div className="grid grid-cols-2 md:grid-cols-4 border border-(--border-color) divide-x divide-y divide-(--border-color)">
                 <div className="col-span-1 md:divide-y-0 divide-y-0">
                   <DataPoint label="PROBLEMS_SOLVED" value={userData.profile.total} icon={<Hash size={14}/>} />
                 </div>
                 <div className="col-span-1 border-t-0">
                   <DataPoint label="DIFFICULTY_EASY" value={userData.profile.easy} />
                 </div>
-                <div className="col-span-1 md:border-t-0 border-t border-[var(--border-color)]">
+                <div className="col-span-1 md:border-t-0 border-t border-(--border-color)">
                   <DataPoint label="DIFFICULTY_MED" value={userData.profile.medium} />
                 </div>
-                <div className="col-span-1 md:border-t-0 border-t border-[var(--border-color)]">
+                <div className="col-span-1 md:border-t-0 border-t border-(--border-color)">
                   <DataPoint label="DIFFICULTY_HARD" value={userData.profile.hard} />
                 </div>
               </div>
@@ -203,12 +200,12 @@ function App() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 {/* Main Recommendations */}
                 <div className="lg:col-span-8 space-y-8">
-                  <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-4">
+                  <div className="flex items-center justify-between border-b border-(--border-color) pb-4">
                     <h2 className="text-xl font-bold mono uppercase tracking-widest flex items-center gap-3">
                       <Terminal size={18} className="text-accent" />
                       QUEUE_RECOMMENDATIONS
                     </h2>
-                    <span className="mono text-[10px] text-[var(--text-muted)]">LIMIT: 08_ENTRIES</span>
+                    <span className="mono text-[10px] text-(--text-muted)">LIMIT: 08_ENTRIES</span>
                   </div>
                   
                   <div className="grid grid-cols-1 gap-1">
@@ -234,7 +231,7 @@ function App() {
 
                 {/* Diagnostics */}
                 <div className="lg:col-span-4 space-y-8">
-                  <div className="flex items-center gap-3 border-b border-[var(--border-color)] pb-4">
+                  <div className="flex items-center gap-3 border-b border-(--border-color) pb-4">
                     <Activity size={18} className="text-accent" />
                     <h2 className="text-xl font-bold mono uppercase tracking-widest">DIAGNOSTICS</h2>
                   </div>
@@ -247,28 +244,28 @@ function App() {
                       <Diagnostic label="BACKTRACKING" value={30} />
                     </div>
                     
-                    <div className="pt-6 border-t border-[var(--border-color)]">
+                    <div className="pt-6 border-t border-(--border-color)">
                       <div className="flex items-center gap-2 mb-4">
                         <Box size={14} className="text-accent" />
-                        <span className="mono text-[10px] text-[var(--text-main)] uppercase tracking-widest">Daily Streak</span>
+                        <span className="mono text-[10px] text-(--text-main) uppercase tracking-widest">Daily Streak</span>
                       </div>
                       <div className="flex items-baseline gap-2">
                         <span className="text-5xl font-bold mono">12</span>
-                        <span className="mono text-xs text-[var(--text-muted)]">CYCLES</span>
+                        <span className="mono text-xs text-(--text-muted)">CYCLES</span>
                       </div>
                     </div>
                     
-                    <button className="w-full mt-4 border border-[var(--border-color)] hover:border-accent hover:text-accent transition-all py-3 mono text-[10px] uppercase tracking-[0.2em] cursor-pointer">
+                    <button className="w-full mt-4 border border-(--border-color) hover:border-accent hover:text-accent transition-all py-3 mono text-[10px] uppercase tracking-[0.2em] cursor-pointer">
                       EXECUTE_DETAILED_ANALYSIS
                     </button>
                   </div>
 
-                  <div className="p-4 border border-accent/20 bg-accent/[0.02] rounded-none">
+                  <div className="p-4 border border-accent/20 bg-accent/2 rounded-none">
                     <div className="flex items-center gap-2 text-accent mb-2">
                       <Zap size={14} />
                       <span className="mono text-[10px] font-bold uppercase">System Recommendation</span>
                     </div>
-                    <p className="text-[11px] mono text-[var(--text-muted)] leading-relaxed">
+                    <p className="text-[11px] mono text-(--text-muted) leading-relaxed">
                       Focus on "GRAPH_TRAVERSAL" for optimal interview readiness. Current success rate is below threshold.
                     </p>
                   </div>
@@ -284,11 +281,11 @@ function App() {
 
 function DataPoint({ label, value, icon }: { label: string, value: number, icon?: React.ReactNode }) {
   return (
-    <div className="bg-[var(--bg-secondary)] p-6 text-center h-full flex flex-col justify-center">
-      <div className="mono text-[10px] text-[var(--text-muted)] mb-3 flex items-center justify-center gap-2 uppercase tracking-widest">
+    <div className="bg-(--bg-secondary) p-6 text-center h-full flex flex-col justify-center">
+      <div className="mono text-[10px] text-(--text-muted) mb-3 flex items-center justify-center gap-2 uppercase tracking-widest">
         {icon} {label}
       </div>
-      <div className="text-4xl font-bold mono tracking-tighter text-[var(--text-main)]">{value.toString().padStart(2, '0')}</div>
+      <div className="text-4xl font-bold mono tracking-tighter text-(--text-main)">{value.toString().padStart(2, '0')}</div>
     </div>
   );
 }
@@ -297,10 +294,10 @@ function Diagnostic({ label, value }: { label: string, progress?: number, value:
   return (
     <div className="space-y-2">
       <div className="flex justify-between mono text-[10px] tracking-widest">
-        <span className="text-[var(--text-muted)]">{label}</span>
+        <span className="text-(--text-muted)">{label}</span>
         <span className="text-accent">{value}%</span>
       </div>
-      <div className="w-full h-1 bg-[var(--border-color)] overflow-hidden">
+      <div className="w-full h-1 bg-(--border-color) overflow-hidden">
         <motion.div 
           initial={{ width: 0 }}
           animate={{ width: `${value}%` }}
@@ -321,26 +318,26 @@ function ProblemRow({ problem, onToggleDone }: { problem: Problem, onToggleDone?
   }[problem.difficulty] || 'text-gray-500';
 
   return (
-    <div className={`group flex items-center justify-between p-4 border border-[var(--border-color)] hover:border-[#333] bg-[var(--bg-secondary)] transition-all relative ${isDone ? 'opacity-30' : ''}`}>
+    <div className={`group flex items-center justify-between p-4 border border-(--border-color) hover:border-[#333] bg-(--bg-secondary) transition-all relative ${isDone ? 'opacity-30' : ''}`}>
       <div className="flex items-center gap-6">
         <button 
           onClick={(e) => {
             e.stopPropagation();
             onToggleDone?.();
           }}
-          className={`mono text-[10px] border px-2 py-1 transition-all cursor-pointer ${isDone ? 'border-green-500/50 text-green-500' : 'border-[var(--border-color)] text-[var(--text-muted)] group-hover:text-accent group-hover:border-accent/30'}`}
+          className={`mono text-[10px] border px-2 py-1 transition-all cursor-pointer ${isDone ? 'border-green-500/50 text-green-500' : 'border-(--border-color) text-(--text-muted) group-hover:text-accent group-hover:border-accent/30'}`}
         >
           {isDone ? 'COMPLETED' : 'PENDING'}
         </button>
         <div>
-          <h4 className={`mono text-sm tracking-tight transition-colors ${isDone ? 'line-through text-[var(--text-muted)]' : 'text-[var(--text-main)] group-hover:text-white'}`}>
+          <h4 className={`mono text-sm tracking-tight transition-colors ${isDone ? 'line-through text-(--text-muted)' : 'text-(--text-main) group-hover:text-white'}`}>
             {problem.title.toUpperCase().replace(/ /g, '_')}
           </h4>
           <div className="flex items-center gap-4 mt-1">
             <span className={`mono text-[9px] uppercase tracking-widest font-bold ${diffClass}`}>
               {problem.difficulty}
             </span>
-            <span className="mono text-[9px] text-[var(--text-muted)] uppercase tracking-widest">TAG::{problem.tag}</span>
+            <span className="mono text-[9px] text-(--text-muted) uppercase tracking-widest">TAG::{problem.tag}</span>
           </div>
         </div>
       </div>
@@ -349,27 +346,10 @@ function ProblemRow({ problem, onToggleDone }: { problem: Problem, onToggleDone?
           href={`https://leetcode.com/problems/${problem.title.toLowerCase().replace(/ /g, '-')}/`} 
           target="_blank" 
           rel="noopener noreferrer"
-          className="mono text-[10px] text-[var(--text-muted)] hover:text-accent transition-colors flex items-center gap-1"
+          className="mono text-[10px] text-(--text-muted) hover:text-accent transition-colors flex items-center gap-1"
         >
           OPEN_SRC <ChevronRight size={12} />
         </a>
-      </div>
-    </div>
-  );
-}
-
-function SkillProgress({ label, progress }: { label: string, progress: number }) {
-  return (
-    <div className="space-y-2">
-      <div className="flex justify-between text-xs font-medium">
-        <span className="text-[var(--text-muted)]">{label}</span>
-        <span className="text-accent">{progress}%</span>
-      </div>
-      <div className="w-full h-1.5 bg-[var(--border-color)] rounded-full overflow-hidden">
-        <div 
-          className="h-full bg-gradient-to-r from-accent to-leetcode-yellow transition-all duration-1000" 
-          style={{ width: `${progress}%` }}
-        />
       </div>
     </div>
   );
