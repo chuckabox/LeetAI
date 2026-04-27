@@ -54,9 +54,10 @@ function App() {
     try {
       const response = await axios.post('http://localhost:3001/api/user/sync', { username });
       setUserData(response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Sync failed', error);
-      alert('Failed to sync. Please check the username.');
+      const message = error.response?.data?.error || 'Failed to sync. Please verify the username is public.';
+      alert(`SYNC_ERROR: ${message}`);
     } finally {
       setLoading(false);
     }
