@@ -89,6 +89,14 @@ function App() {
             {theme === 'dark' ? <Sun size={12} /> : <Moon size={12} />}
             <span>{theme.toUpperCase()}_MODE</span>
           </button>
+          {userData && (
+            <button 
+              onClick={() => setUserData(null)}
+              className="flex items-center gap-2 hover:text-red-500 transition-colors cursor-pointer"
+            >
+              <span>LOGOUT</span>
+            </button>
+          )}
           <span className="text-accent">LEET_AI v1.0.4</span>
         </div>
       </nav>
