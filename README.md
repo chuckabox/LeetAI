@@ -10,7 +10,7 @@
 
 **LeetAI** helps you practice LeetCode problems more effectively. It looks at your public profile, finds topics where you need more practice, and suggests a list of problems to work on.
 
-[Dashboard](#features) • [Installation](#installation) • [Architecture](#architecture)
+[Dashboard](#features) • [Installation](#installation) • [Deployment](#deployment) • [Architecture](#architecture)
 
 ## Features
 
@@ -69,19 +69,28 @@ npm install
 npm run dev
 ```
 
+## Deployment
+    
+LeetAI is configured for easy deployment to **GitHub Pages**.
+
+### Steps to Deploy:
+1. **Push to GitHub**: Push your code to a GitHub repository.
+2. **Enable Actions**: GitHub Actions will automatically build and deploy the app to the `gh-pages` branch.
+3. **Configure Pages Settings**:
+   - Go to your repository **Settings** > **Pages**.
+   - Under **Build and deployment** > **Source**, select **GitHub Actions**.
+4. **Standalone Mode**: The app now runs entirely in the browser using a CORS proxy and a pre-bundled problem database, making it 100% compatible with static hosting.
+
 ## Architecture
 
-LeetAI uses a simple client-server setup. You can verify the server status via the `/health` endpoint.
+LeetAI now operates in a **Standalone Mode** for web deployment while maintaining a backend option for local development.
 
 ```mermaid
 graph TD
-    A[Client - React] -->|POST /sync| B[Server - Express]
-    B -->|GraphQL Query| C[LeetCode API]
-    C -->|User Stats| B
-    B -->|Analyze Gaps| D[Recommendation Engine]
-    D -->|Top Problems| B
-    B -->|Save Stats| E[(SQLite DB)]
-    B -->|Response| A
+    A[Client - React] -->|Direct GraphQL| C[LeetCode API via Proxy]
+    A -->|Local Analysis| D[Internal Engine]
+    D -->|Bundled Data| F[problems.json]
+    A -->|Static Hosting| G[GitHub Pages]
 ```
 
 ## License

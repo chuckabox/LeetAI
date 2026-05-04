@@ -15,6 +15,11 @@ import {
   Moon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import problemsData from './data/problems.json';
+
+const LEETCODE_GRAPHQL_URL = 'https://leetcode.com/graphql';
+// Use a CORS proxy for the GraphQL endpoint
+const PROXY_URL = 'https://corsproxy.io/?url=';
 
 const LEETCODE_BASE_URL = 'https://leetcode.com/problems';
 
@@ -54,11 +59,92 @@ function App() {
     try {
       // Small artificial delay for UX
       await new Promise(resolve => setTimeout(resolve, 800));
-      const response = await axios.post('http://localhost:3001/api/user/sync', { username });
-      setUserData(response.data);
+      
+      // Fetch data from LeetCode via Proxy
+      const profileQuery = `
+        query userPublicProfile($username: String!) {
+          matchedUser(username: $username) {
+            username
+            submitStats: submitStatsGlobal {
+              acSubmissionNum {
+                difficulty
+                count
+                submissions
+              }
+            }
+          }
+        }
+      `;
+      
+      const tagQuery = `
+        query userTagProgress($username: String!) {
+          matchedUser(username: $username) {
+            tagProblemCounts {
+              advanced { tagName tagSlug problemsSolved }
+              intermediate { tagName tagSlug problemsSolved }
+              fundamental { tagName tagSlug problemsSolved }
+            }
+          }
+        }
+      `;
+
+      const [profileRes, tagRes] = await Promise.all([
+        axios.post(`${PROXY_URL}${encodeURIComponent(LEETCODE_GRAPHQL_URL)}`, {
+          query: profileQuery,
+          variables: { username }
+        }),
+        axios.post(`${PROXY_URL}${encodeURIComponent(LEETCODE_GRAPHQL_URL)}`, {
+          query: tagQuery,
+          variables: { username }
+        })
+      ]);
+
+      const profile = profileRes.data.data.matchedUser;
+      const tagStats = tagRes.data.data.matchedUser?.tagProblemCounts;
+
+      if (!profile) throw new Error('User not found or profile is private.');
+
+      const stats = profile.submitStats.acSubmissionNum;
+      const total = stats.find((s: any) => s.difficulty === 'All')?.count || 0;
+      const easy = stats.find((s: any) => s.difficulty === 'Easy')?.count || 0;
+      const medium = stats.find((s: any) => s.difficulty === 'Medium')?.count || 0;
+      const hard = stats.find((s: any) => s.difficulty === 'Hard')?.count || 0;
+
+      // Recommendation Logic (moved from server)
+      const allTags = [
+        ...tagStats.advanced,
+        ...tagStats.intermediate,
+        ...tagStats.fundamental
+      ];
+
+      const weakTags = allTags
+        .filter((tag: any) => tag.problemsSolved < 20)
+        .sort((a: any, b: any) => a.problemsSolved - b.problemsSolved)
+        .slice(0, 4);
+
+      const recommendations: Problem[] = [];
+      for (const tag of weakTags) {
+        const matchingProblems = problemsData.filter(p => p.tags.includes(tag.tagSlug));
+        // Pick random ones
+        const sampled = matchingProblems
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 2)
+          .map(p => ({
+            id: p.id,
+            title: p.title,
+            difficulty: p.difficulty,
+            tag: tag.tagName
+          }));
+        recommendations.push(...sampled);
+      }
+
+      setUserData({
+        profile: { username: profile.username, total, easy, medium, hard },
+        recommendations: recommendations.slice(0, 8)
+      });
     } catch (error: any) {
       console.error('Sync failed', error);
-      const message = error.response?.data?.error || 'Failed to sync. Please verify the username is public.';
+      const message = error.message || 'Failed to sync. Please verify the username is public.';
       alert(`SYNC_ERROR: ${message}`);
     } finally {
       setLoading(false);
